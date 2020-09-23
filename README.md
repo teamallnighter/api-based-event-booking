@@ -143,4 +143,4 @@ app.listen(3000);
 
 [localhost:3000/graphql](http://localhost:3000/graphql)
 
-![Graph-QL Demo 1](/docs/screenshots/graph-ql-demo-1.png)
+![Graph-QL Demo 1](docs/screenshots/graph-ql-demo-1.png)

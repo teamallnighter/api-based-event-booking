@@ -1,0 +1,19 @@
+{
+  "name": "event-bookey",
+  "version": "0.0.1",
+  "description": "api-based-event-booking",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/teamallnighter/api-based-event-booking.git"
+  },
+  "author": "teamallnighter",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/teamallnighter/api-based-event-booking/issues"
+  },
+  "homepage": "https://github.com/teamallnighter/api-based-event-booking#readme"
+}

@@ -1,8 +1,7 @@
 {
     "env": {
-        "MONGO_USER": "web-site",
-        "MONGO_PASSWORD": "open4chris",
-        "DB_NAME": "test-1",
-        "COLLECTION_NAME": "test-1"
+        "MONGO_USER": "username",
+        "MONGO_PASSWORD": "password",
+        "DB_NAME": "dbname"
     }
 }

@@ -2,7 +2,8 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const { graphqlHTTP } = require("express-graphql");
 const { buildSchema } = require("graphql");
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
 
 const Event = require('./models/event');
 
@@ -16,12 +17,18 @@ app.use(
     "/graphql",
     graphqlHTTP({
         schema: buildSchema(`
-            type Event{
+            type Event {
                 _id: ID!
                 title: String!
                 description: String!
                 price: Float!
                 date: String!
+            }
+
+            type User {
+                _id: ID!
+                email: String!
+                passwod: String
             }
 
             input EventInput {
@@ -31,12 +38,18 @@ app.use(
                 date: String!
             }
 
+            input UserInput {
+                email: String!
+                password: String!
+            }
+
             type RootQuery {
                 events: [Event!]!
             }
 
             type RootMutation {
                 createEvent(eventInput: EventInput): Event
+                createUser(userInput: UserInput): User
             }
 
             schema {
@@ -75,6 +88,23 @@ app.use(
                 });
                 return event;
             },
+            createUser: args => {
+                return bcrypt
+                .hash(args.userInput.password, 12)
+                .then(hashedPassword => {
+                    const user = new User({
+                        email: args.userInput.email,
+                        password: hashedPassword
+                    });
+                    return user.save();
+                })
+                .then(result => {
+                    return{ ...result._doc, _id: result.id };
+                })
+                .catch(err => {
+                    throw err;
+                });
+            }
         },
         graphiql: true,
     }),

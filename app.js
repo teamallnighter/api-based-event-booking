@@ -2,6 +2,9 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const { graphqlHTTP } = require("express-graphql");
 const { buildSchema } = require("graphql");
+const mongoose = require('mongoose')
+
+const Event = require('./models/event');
 
 const app = express();
 
@@ -43,17 +46,33 @@ app.use(
         `),
         rootValue: {
             events: () => {
-                return events;
+                return Event.find()
+                .then(events => {
+                    return events.map(event => {
+                        return { ...event._doc };
+                    })
+                })
+                .catch(err => {
+                    throw err;
+                });
             },
             createEvent: (args) => {
-                const event = {
-                    _id: Math.random().toString(),
+                const event = new Event({
                     title: args.eventInput.title,
                     description: args.eventInput.description,
                     price: +args.eventInput.price,
-                    date: args.eventInput.date,
-                };
-                events.push(event);
+                    date: new Date(args.eventInput.date)
+                });
+                return event
+                .save()
+                .then(result => {
+                    console.log(result);
+                    return {...result._doc};
+                })
+                .catch(err => {
+                    console.log(err);
+                    throw err;
+                });
                 return event;
             },
         },
@@ -61,4 +80,11 @@ app.use(
     }),
 );
 
+mongoose.connect('mongodb+srv://web-site:2nq0k7fYb9vVxL7v@cluster0.oxtkc.mongodb.net/events?retryWrites=true&w=majority')
+.then(() => {
+
+})
+.catch(err => {
+    console.log(err);
+});
 app.listen(3000);

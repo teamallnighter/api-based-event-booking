@@ -110,7 +110,7 @@ app.use(
     }),
 );
 
-mongoose.connect('mongodb+srv://web-site:2nq0k7fYb9vVxL7v@cluster0.oxtkc.mongodb.net/events?retryWrites=true&w=majority')
+mongoose.connect('mongodb+srv://<username>:<password>@cluster0.oxtkc.mongodb.net/<dbname>?retryWrites=true&w=majority')
 .then(() => {
 
 })

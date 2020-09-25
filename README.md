@@ -47,3 +47,8 @@ MONGO_USER=username
 MONGO_PASSWORD=password
 DB_NAME=dbname
 ```
+
+
+#### Whrre I left off
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/bgq7FRSPDpI?start=1337" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
